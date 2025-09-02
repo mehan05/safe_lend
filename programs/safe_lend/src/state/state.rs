@@ -37,6 +37,7 @@ pub struct UserState{
 #[derive(InitSpace)]
 pub struct LoanState{
     pub lend_amount:u64,
+    pub collateral_amount:u64,
     pub intrest_rate:u64,
     pub start_time:Option<i64>,
     pub end_time:Option<i64>,

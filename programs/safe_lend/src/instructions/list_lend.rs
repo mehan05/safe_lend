@@ -65,13 +65,12 @@ pub struct ListLend<'info>{
 
 impl <'info> ListLend<'info>{
 
-
-
     pub fn initialize_lending(&mut self,seed:u64,lend_amount:u64,duration:i64,bumps:ListLendBumps  )->Result<()>{
 
 
         self.loan_state.set_inner(LoanState{
             lend_amount,
+            collateral_amount:5,
             duration,
             status:LoanStatus::Pending,
             intrest_rate:5,
@@ -89,7 +88,6 @@ impl <'info> ListLend<'info>{
         Ok(())
 
     }
-
 
     pub fn transfer_funds(&mut self,amount:u64)->Result<()>{
 

@@ -6,7 +6,7 @@ use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, Loa
 
 #[derive(Accounts)]
 #[instruction(seed:u64)]
-pub struct ListLend<'info>{
+pub struct Borrow<'info>{
 
     #[account(mut)]
     pub admin:AccountInfo<'info>,
@@ -74,9 +74,9 @@ pub struct ListLend<'info>{
     
 }
 
-impl<'info> ListLend<'info>{
+impl<'info> Borrow<'info>{
 
-       pub fn transfer_funds(&mut self,amount:u64)->Result<()>{
+       pub fn transfer_funds(&mut self)->Result<()>{
 
 
         let cpi_program = self.token_program.to_account_info();
@@ -91,7 +91,7 @@ impl<'info> ListLend<'info>{
         };
 
         let ctx = CpiContext::new(cpi_program.clone(),cpi_accounts);
-        transfer_checked(ctx,amount,self.mint_usdt.decimals)?;
+        transfer_checked(ctx,self.loan_state.collateral_amount,self.mint_usdt.decimals)?;
 
 
         let cpi_accounts_lend_amount = TransferChecked{
@@ -103,9 +103,9 @@ impl<'info> ListLend<'info>{
         };
 
         let ctx = CpiContext::new(cpi_program,cpi_accounts_lend_amount);
-        transfer_checked(ctx,amount,self.mint_usdt.decimals)?;
+        transfer_checked(ctx,self.loan_state.lend_amount,self.mint_usdt.decimals)?;
 
-             let clock: std::result::Result<Clock, ProgramError>  = Clock::get();
+        let clock: std::result::Result<Clock, ProgramError>  = Clock::get();
 
         let start_time = clock.unwrap().unix_timestamp;
         let end_time = start_time + self.loan_state.duration;
@@ -116,8 +116,6 @@ impl<'info> ListLend<'info>{
         self.loan_state.borrower = Some(self.borrower.key());
         self.loan_state.start_time = Some(start_time);
         self.loan_state.end_time = Some(end_time);
-
-
 
         Ok(())
 

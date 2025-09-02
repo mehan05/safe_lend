@@ -36,7 +36,7 @@ pub struct RegisterUser<'info>{
         associated_token::authority = lender,
         associated_token::token_program = token_program,
     )]
-    pub user_usdt_ata:InterfaceAccount<'info,TokenAccount>,
+    pub lender_ata:InterfaceAccount<'info,TokenAccount>,
 
     pub system_program:Program<'info,System>,
     pub token_program:Interface<'info,TokenInterface>,
