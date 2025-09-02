@@ -40,10 +40,6 @@ pub struct ListLend<'info>{
     )]
     pub lend_vault:InterfaceAccount<'info,TokenAccount>,
 
-    
-
-    
-
     #[account(
         mint::token_program = token_program
     )]
@@ -69,12 +65,10 @@ pub struct ListLend<'info>{
 
 impl <'info> ListLend<'info>{
 
-    pub fn initialize_lend(&mut self,seed:u64,lend_amount:u64,duration:i64,bumps:ListLendBumps  )->Result<()>{
 
-        let clock  = Clock::get();
 
-        let start_time = clock.unwrap().unix_timestamp;
-        let end_time = start_time + duration;
+    pub fn initialize_lending(&mut self,seed:u64,lend_amount:u64,duration:i64,bumps:ListLendBumps  )->Result<()>{
+
 
         self.loan_state.set_inner(LoanState{
             lend_amount,
@@ -83,13 +77,14 @@ impl <'info> ListLend<'info>{
             intrest_rate:5,
             seed,
             token:self.mint_usdt.key(),
-            start_time,
-            end_time,
+            start_time:None,
+            end_time:None,
             lender:self.lender.key(),
             borrower:None,
             bumps:bumps.loan_state,
         });
 
+        self.transfer_funds(lend_amount)?;
 
         Ok(())
 
@@ -103,8 +98,15 @@ impl <'info> ListLend<'info>{
         
         let cpi_accounts = TransferChecked{
             from: self.lender_ata.to_account_info(),
-            to: self.lender
-        }
+            to: self.lend_vault.to_account_info(),
+            authority: self.lender.to_account_info(),
+            mint: self.mint_usdt.to_account_info(),
+        };
+
+        let ctx = CpiContext::new(cpi_program,cpi_accounts);
+        transfer_checked(ctx,amount,self.mint_usdt.decimals)?;
+
+        Ok(())
 
     }
 
