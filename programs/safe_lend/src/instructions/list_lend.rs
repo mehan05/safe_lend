@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token::AssociatedToken, token::Token, token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked}};
+use anchor_spl::{associated_token::AssociatedToken, 
+    token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked}};
 
 use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, LoanStatus, UserState}};
 
@@ -8,8 +9,6 @@ use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, Loa
 #[instruction(seed:u64)]
 pub struct ListLend<'info>{
 
-    #[account(mut)]
-    pub admin:AccountInfo<'info>,
 
     #[account(mut)]
     pub lender: Signer<'info>,

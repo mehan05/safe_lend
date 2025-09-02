@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token::AssociatedToken, token::Token, token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked}};
+use anchor_spl::{associated_token::AssociatedToken, 
+    token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked}};
 
 use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, LoanStatus, UserState}};
 
@@ -9,7 +10,7 @@ use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, Loa
 pub struct Borrow<'info>{
 
     #[account(mut)]
-    pub admin:AccountInfo<'info>,
+    pub admin:Signer<'info>,
     
       #[account(mut)]
     pub lender: Signer<'info>,
@@ -76,7 +77,7 @@ pub struct Borrow<'info>{
 
 impl<'info> Borrow<'info>{
 
-       pub fn transfer_funds(&mut self)->Result<()>{
+       pub fn borrow_transfer_funds(&mut self)->Result<()>{
 
 
         let cpi_program = self.token_program.to_account_info();
@@ -102,7 +103,19 @@ impl<'info> Borrow<'info>{
         
         };
 
-        let ctx = CpiContext::new(cpi_program,cpi_accounts_lend_amount);
+        let lender = self.lender.key();
+        let loan_state = self.loan_state.seed.to_le_bytes() ;
+        let seeds = &[
+            b"lender",
+            lender.as_ref(),
+            loan_state.as_ref(),
+            &[self.loan_state.bumps]
+        ];
+
+        let signer_seeds = &[&seeds[..]];
+
+        let ctx = CpiContext::new_with_signer(cpi_program,cpi_accounts_lend_amount,signer_seeds);
+
         transfer_checked(ctx,self.loan_state.lend_amount,self.mint_usdt.decimals)?;
 
         let clock: std::result::Result<Clock, ProgramError>  = Clock::get();
@@ -111,6 +124,8 @@ impl<'info> Borrow<'info>{
         let end_time = start_time + self.loan_state.duration;
 
 
+
+        self.global_state.total_loans.checked_add(1);
         self.user_state.active_loans.checked_add(1);
         self.loan_state.status = LoanStatus::Active;
         self.loan_state.borrower = Some(self.borrower.key());

@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token::AssociatedToken, token, token_interface::{Mint, TokenAccount, TokenInterface}};
+use anchor_spl::{associated_token::AssociatedToken, 
+     token_interface::{Mint, TokenAccount, TokenInterface}};
 
 use crate::{constants::ANCHOR_DISCRIMINATOR, state::GlobalState};
 

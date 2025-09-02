@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token::AssociatedToken, token_interface::TransferChecked, token_interface::{Mint, TokenAccount, TokenInterface,transfer_checked}};
+use anchor_spl::{associated_token::AssociatedToken,
+     token_interface::{Mint, TokenAccount, TokenInterface,transfer_checked,TransferChecked}};
 
 use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, UserState}};
 
@@ -7,9 +8,6 @@ use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, LoanState, Use
 #[derive(Accounts)]
 #[instruction(seed:u64)]
 pub struct WithDraw<'info>{
-
-    #[account(mut)]
-    pub admin:AccountInfo<'info>,
 
     #[account(mut)]
     pub lender: Signer<'info>,
@@ -31,9 +29,7 @@ pub struct WithDraw<'info>{
     )]
     pub loan_state:Account<'info,LoanState>,
 
-    #[account(
-        mint::token_program = token_program
-    )]
+ 
     pub mint_usdt:InterfaceAccount<'info,Mint>,
 
     #[account(
@@ -45,7 +41,7 @@ pub struct WithDraw<'info>{
     )]
     pub lender_ata:InterfaceAccount<'info,TokenAccount>,
 
-        #[account(
+    #[account(
         mut,
         associated_token::mint = mint_usdt,
         associated_token::authority = user_state,
@@ -62,7 +58,7 @@ pub struct WithDraw<'info>{
 
 impl<'info> WithDraw<'info> {
 
-    fn transfer_funds(&mut self)->Result<()>{
+   pub  fn withdraw_transfer_funds(&mut self)->Result<()>{
         let cpi_program = self.token_program.to_account_info();
 
         let cpi_accounts = TransferChecked{

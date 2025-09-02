@@ -8,8 +8,6 @@ use crate::{constants::ANCHOR_DISCRIMINATOR, state::{GlobalState, UserState}};
 #[instruction(seed:u64)]
 pub struct RegisterUser<'info>{
 
-    #[account(mut)]
-    pub admin:AccountInfo<'info>,
 
     #[account(mut)]
     pub lender: Signer<'info>,

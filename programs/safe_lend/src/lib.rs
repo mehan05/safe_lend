@@ -2,15 +2,17 @@ use anchor_lang::prelude::*;
 pub mod instructions;
 pub mod state;
 pub mod constants;
-
+pub use instructions::*;
 declare_id!("6dkxLKKJp4c6ayPoTHtzszMfDndFMFBtxjFa3eUauSTj");
+
 
 #[program]
 pub mod safe_lend {
+
     use super::*;
 
-    pub fn initialize(ctx: Context<InitializeLend>) -> Result<()> {
-        ctx.accounts.initialize_lending_pool(ctx.bumps)?;
+    pub fn initialize(ctx: Context<InitializeLendingPool>) -> Result<()> {
+        ctx.accounts.initialize_lending_pool(ctx.bumps);
         Ok(())
     }
 
@@ -23,15 +25,15 @@ pub mod safe_lend {
     }
 
     pub fn  borrow(ctx: Context<Borrow>)->Result<()>{
-        ctx.accounts.borrow()
+        ctx.accounts.borrow_transfer_funds()
     }
 
-    pub fn repay(ctx: Context<Repay>)->Result<()>{
+    pub fn repay_funds(ctx: Context<Repay>)->Result<()>{
         ctx.accounts.repay()
     }
 
-    pub fn withdraw(ctx: Context<Withdraw>)->Result<()>{
-        ctx.accounts.withdraw()
+    pub fn withdraw_funds(ctx: Context<WithDraw>)->Result<()>{
+        ctx.accounts.withdraw_transfer_funds()
     }
 
 
