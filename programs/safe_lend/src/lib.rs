@@ -3,7 +3,7 @@ pub mod instructions;
 pub mod state;
 pub mod constants;
 pub use instructions::*;
-declare_id!("6dkxLKKJp4c6ayPoTHtzszMfDndFMFBtxjFa3eUauSTj");
+declare_id!("97jSKhrSaWja8Z7F3RD4tPEhB9mUrHyvRTS9DxZumFgF");
 
 
 #[program]
@@ -12,7 +12,7 @@ pub mod safe_lend {
     use super::*;
 
     pub fn initialize(ctx: Context<InitializeLendingPool>) -> Result<()> {
-        ctx.accounts.initialize_lending_pool(ctx.bumps);
+        ctx.accounts.initialize_lending_pool(ctx.bumps)?;
         Ok(())
     }
 

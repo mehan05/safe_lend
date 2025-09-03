@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-safe_lend = "6dkxLKKJp4c6ayPoTHtzszMfDndFMFBtxjFa3eUauSTj"
+safe_lend = "97jSKhrSaWja8Z7F3RD4tPEhB9mUrHyvRTS9DxZumFgF"
 
 [registry]
 url = "https://api.apr.dev"
