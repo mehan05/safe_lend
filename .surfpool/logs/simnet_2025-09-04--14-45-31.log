@@ -1,0 +1,38 @@
+[2025-09-04--14-45-31 INFO actix_server::builder] starting 5 workers
+[2025-09-04--14-45-31 INFO actix_server::server] Tokio runtime found; starting in existing Tokio runtime
+[2025-09-04--14-45-31 INFO actix_server::server] starting service: "actix-web-service-127.0.0.1:18488", workers: 5, listening on: 127.0.0.1:18488
+[2025-09-04--14-45-32 INFO parity_ws] Listening for new connections on 127.0.0.1:8900.
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Failure Recovery Info - An ephemeral authority account will be created and funded to write to the buffer account.
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Failure Recovery Info - Please save the following information in case the deployment fails and the account needs to be recovered:
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority public key: 2VvmdGTyHDrR2Y9znigseSjuNVtKwG7f6wbGQZQcZ12g
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority secret key: 3nDpvaJF9J53XKHqRCg2Z48NjEShmYJwJCXLnABEuHSCRBUkAUqBdw8s5myG2WgVXG5AEsPNCoug6L4ThgeD4wbE
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Account Created - Ephemeral authority account created and funded to write to buffer
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Failure Recovery Info - Creating program buffer account at pubkey 7MfQZPxeUEY4AtLxdEvHBjjAAnYKXbUQtQPvhTnnRn4D
+[2025-09-04--14-45-33 INFO txtx::svm::deploy_program] Account Created - Program buffer account created
+[2025-09-04--14-45-33 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:54234.
+[2025-09-04--14-46-17 INFO txtx::svm::deploy_program] Buffer Ready - Writing to buffer account is complete
+[2025-09-04--14-46-18 INFO txtx::svm::deploy_program] Program Created - Program AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg has been deployed
+[2025-09-04--14-46-18 INFO txtx::svm::deploy_program] Complete - Ephemeral authority account closed and leftover funds returned to payer
+[2025-09-04--14-46-56 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:37564.
+[2025-09-04--14-46-56 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:37578.
+[2025-09-04--14-46-57 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:37592.
+[2025-09-04--14-50-41 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:36960.
+[2025-09-04--14-50-42 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:36964.
+[2025-09-04--14-50-44 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56910.
+[2025-09-04--14-59-51 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:35810.
+[2025-09-04--14-59-52 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:35812.
+[2025-09-04--14-59-53 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:52284.
+[2025-09-04--15-00-05 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:50634.
+[2025-09-04--15-00-06 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:50636.
+[2025-09-04--15-24-46 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56308.
+[2025-09-04--15-24-48 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56310.
+[2025-09-04--15-24-49 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56318.
+[2025-09-04--15-32-34 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:53484.
+[2025-09-04--15-32-36 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:53490.
+[2025-09-04--15-32-36 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:53504.
+[2025-09-04--15-37-16 INFO actix_server::accept] accept thread stopped
+[2025-09-04--15-37-16 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--15-37-16 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--15-37-16 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--15-37-16 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--15-37-16 INFO actix_server::worker] shutting down idle worker

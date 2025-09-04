@@ -3,15 +3,14 @@ pub mod instructions;
 pub mod state;
 pub mod constants;
 pub use instructions::*;
-declare_id!("97jSKhrSaWja8Z7F3RD4tPEhB9mUrHyvRTS9DxZumFgF");
-
+declare_id!("AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg");
 
 #[program]
 pub mod safe_lend {
 
     use super::*;
 
-    pub fn initialize(ctx: Context<InitializeLendingPool>) -> Result<()> {
+    pub fn initialize_lend(ctx: Context<InitializeLendingPool>) -> Result<()> {
         ctx.accounts.initialize_lending_pool(ctx.bumps)?;
         Ok(())
     }

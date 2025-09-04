@@ -12,8 +12,8 @@ import {
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import { expect } from "chai";
-import { SafeLend } from "../target/types/safe_lend";
 import { SYSTEM_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/native/system";
+import { SafeLend } from "../target/types/safe_lend";
 
 let provider = anchor.AnchorProvider.env();
 
@@ -118,30 +118,30 @@ describe("safe_lend", () => {
 
   it("Initialize Lending Pool", async () => {
     // Add your test here.
-    let lender = anchor.web3.Keypair.generate();
-    let borrower = anchor.web3.Keypair.generate();
-    let admin = anchor.web3.Keypair.generate();
+    lender = anchor.web3.Keypair.generate();
+     borrower = anchor.web3.Keypair.generate();
+     admin = anchor.web3.Keypair.generate();
 
-    airDrop(lender.publicKey, 2);
-    airDrop(borrower.publicKey, 2);
-    airDrop(admin.publicKey, 2);
+    airDrop(lender.publicKey, 4);
+    airDrop(borrower.publicKey, 4);
+    airDrop(admin.publicKey, 4);
 
-    let mint_sol = await mint_account(lender);
-    let mint_usdt = await mint_account(borrower);
+    mint_sol = await mint_account(lender);
+     mint_usdt = await mint_account(borrower);
 
-    let global_state =  anchor.web3.PublicKey.findProgramAddressSync(
+     global_state =  anchor.web3.PublicKey.findProgramAddressSync(
       [Buffer.from("global_state"), admin.publicKey.toBuffer()],
       program.programId
     )[0];
 
-    let user_state =  anchor.web3.PublicKey.findProgramAddressSync(
+    user_state =  anchor.web3.PublicKey.findProgramAddressSync(
       [Buffer.from("lender"),
         lender.publicKey.toBuffer(),
         SEED.toArrayLike(Buffer, "le", 8)
       ],program.programId
     )[0];
 
-    let loan_state =  anchor.web3.PublicKey.findProgramAddressSync(
+    loan_state =  anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("loan"),
         user_state.toBuffer(),
@@ -151,23 +151,25 @@ describe("safe_lend", () => {
       program.programId
     )[0];
 
-    let treasure_vault =  getAssociatedTokenAddressSync(
+    treasure_vault =  getAssociatedTokenAddressSync(
       mint_sol,
-      admin.publicKey
+      admin.publicKey,
+      true
     );
-    let lender_ata =  getAssociatedTokenAddressSync(
+
+     lender_ata =  getAssociatedTokenAddressSync(
       mint_sol,
       borrower.publicKey
     );
-    let lender_vault =  getAssociatedTokenAddressSync(
+     lender_vault =  getAssociatedTokenAddressSync(
       mint_sol,
       lender.publicKey
     );
-    let borrower_ata =  getAssociatedTokenAddressSync(
+     borrower_ata =  getAssociatedTokenAddressSync(
       mint_sol,
       borrower.publicKey
     );
-    let borrower_vault =  getAssociatedTokenAddressSync(
+     borrower_vault =  getAssociatedTokenAddressSync(
       mint_sol,
       borrower.publicKey
     );
@@ -180,8 +182,10 @@ describe("safe_lend", () => {
     console.log("lender_vault", lender_vault);
     console.log("borrower_ata", borrower_ata);
     console.log("borrower_vault", borrower_vault);
+    
 
-    await program.methods.initialize()
+
+      await program.methods.initializeLend()
     .accountsStrict({
       admin: admin.publicKey,
       globalState: global_state,
@@ -193,11 +197,14 @@ describe("safe_lend", () => {
       associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID
     }).signers([admin]).rpc();
 
+
+
     let global_state_data = await program.account.globalState.fetch(
       global_state, 
     );
 
     expect(global_state_data.bumps).to.not.equal(null);
+    
 
   });
 
