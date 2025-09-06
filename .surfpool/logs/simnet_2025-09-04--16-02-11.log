@@ -1,0 +1,17 @@
+[2025-09-04--16-02-11 INFO actix_server::builder] starting 5 workers
+[2025-09-04--16-02-11 INFO actix_server::server] Tokio runtime found; starting in existing Tokio runtime
+[2025-09-04--16-02-11 INFO actix_server::server] starting service: "actix-web-service-127.0.0.1:18488", workers: 5, listening on: 127.0.0.1:18488
+[2025-09-04--16-02-12 INFO parity_ws] Listening for new connections on 127.0.0.1:8900.
+[2025-09-04--16-02-13 INFO txtx::svm::deploy_program] Failure Recovery Info - An ephemeral authority account will be created and funded to write to the buffer account.
+[2025-09-04--16-02-13 INFO txtx::svm::deploy_program] Failure Recovery Info - Please save the following information in case the deployment fails and the account needs to be recovered:
+[2025-09-04--16-02-13 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority public key: EWGP1rJF5pCw2eoyUJn7yPMcWaeGhf3Xuf4PbVuPFtPk
+[2025-09-04--16-02-13 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority secret key: 5iSnnhg4PeJj2zL1pwDSJEACfi5FgHBEgGtmipaf3UXKGtP1KyzE99bgJRAQZPVL2GVcbjowK6kRTcyaXdqhwAhY
+[2025-09-04--16-02-14 INFO txtx::svm::deploy_program] Account Created - Ephemeral authority account created and funded to write to buffer
+[2025-09-04--16-02-14 INFO txtx::svm::deploy_program] Failure Recovery Info - Creating program buffer account at pubkey 8gMD13bzg47rpybTCdhLcZRqD47eTvmWmCD5BpB3xrTq
+[2025-09-04--16-02-14 INFO txtx::svm::deploy_program] Account Created - Program buffer account created
+[2025-09-04--16-02-21 INFO actix_server::accept] accept thread stopped
+[2025-09-04--16-02-21 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--16-02-21 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--16-02-21 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--16-02-21 INFO actix_server::worker] shutting down idle worker
+[2025-09-04--16-02-21 INFO actix_server::worker] shutting down idle worker

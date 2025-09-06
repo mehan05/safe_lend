@@ -31,7 +31,7 @@ pub struct ListLend<'info>{
     pub loan_state:Account<'info,LoanState>,
 
     #[account(
-        init,
+        init_if_needed,
         payer = lender,
         associated_token::mint = mint_usdt,
         associated_token::authority = user_state,

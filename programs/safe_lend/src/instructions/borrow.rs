@@ -20,9 +20,9 @@ pub struct Borrow<'info>{
 
     #[account(
         init_if_needed,
-        payer = lender,
+        payer = borrower,
         associated_token::mint = mint_sol,
-        associated_token::authority = lender,
+        associated_token::authority = borrower,
         associated_token::token_program = token_program,
     )]
     pub borrower_ata:InterfaceAccount<'info,TokenAccount>,
@@ -60,7 +60,7 @@ pub struct Borrow<'info>{
     pub lend_vault:InterfaceAccount<'info,TokenAccount>,
 
     #[account(
-        init,
+        init_if_needed,
         payer = borrower,
         associated_token::mint = mint_sol,
         associated_token::authority = user_state,

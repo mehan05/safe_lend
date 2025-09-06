@@ -39,6 +39,3 @@ pub mod safe_lend {
 
     
 }
-
-#[derive(Accounts)]
-pub struct Initialize {}
