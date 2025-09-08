@@ -60,8 +60,6 @@ pub struct ListLend<'info>{
     
 }
 
-
-
 impl <'info> ListLend<'info>{
 
     pub fn initialize_lending(&mut self,seed:u64,lend_amount:u64,duration:i64,bumps:ListLendBumps  )->Result<()>{

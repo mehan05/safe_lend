@@ -23,7 +23,8 @@ pub mod safe_lend {
         ctx.accounts.initialize_lending(seed,lend_amount,duration,ctx.bumps)
     }
 
-    pub fn  borrow(ctx: Context<Borrow>)->Result<()>{
+
+    pub fn  borrow(ctx: Context<Borrow>,seed:u64)->Result<()>{
         ctx.accounts.borrow_transfer_funds()
     }
 

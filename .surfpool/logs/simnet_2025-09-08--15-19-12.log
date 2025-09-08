@@ -1,0 +1,39 @@
+[2025-09-08--15-19-12 INFO actix_server::builder] starting 5 workers
+[2025-09-08--15-19-12 INFO actix_server::server] Tokio runtime found; starting in existing Tokio runtime
+[2025-09-08--15-19-12 INFO actix_server::server] starting service: "actix-web-service-127.0.0.1:18488", workers: 5, listening on: 127.0.0.1:18488
+[2025-09-08--15-19-14 INFO parity_ws] Listening for new connections on 127.0.0.1:8900.
+[2025-09-08--15-19-18 INFO txtx::svm::deploy_program] Failure Recovery Info - An ephemeral authority account will be created and funded to write to the buffer account.
+[2025-09-08--15-19-18 INFO txtx::svm::deploy_program] Failure Recovery Info - Please save the following information in case the deployment fails and the account needs to be recovered:
+[2025-09-08--15-19-18 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority public key: fHVbcDSpigr87AixHBrKasEzmpKH4jgxqcdZBqEeyKK
+[2025-09-08--15-19-18 INFO txtx::svm::deploy_program] Failure Recovery Info - Ephemeral authority secret key: 4oizetuKpFPxb2MiAqLw8UeiLMEu2kc4NEPrAHhtupFVA4TD3v8UozZGNfAEv7fzPFsC9JF2yzMDHJFyY3A92c53
+[2025-09-08--15-19-19 INFO txtx::svm::deploy_program] Account Created - Ephemeral authority account created and funded to write to buffer
+[2025-09-08--15-19-19 INFO txtx::svm::deploy_program] Failure Recovery Info - Creating program buffer account at pubkey i1efDoHF5biDivSwaNwTQueEeUJZUAd55gdiPjecTuk
+[2025-09-08--15-19-19 INFO txtx::svm::deploy_program] Account Created - Program buffer account created
+[2025-09-08--15-19-19 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:40056.
+[2025-09-08--15-19-21 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:40060.
+[2025-09-08--15-19-25 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56840.
+[2025-09-08--15-19-26 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56854.
+[2025-09-08--15-19-27 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56868.
+[2025-09-08--15-19-29 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56880.
+[2025-09-08--15-19-30 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56884.
+[2025-09-08--15-19-30 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-19-30 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-19-30 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-19-30 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-19-31 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:56896.
+[2025-09-08--15-19-31 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-19-31 ERROR litesvm] Program account AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg is not executable.
+[2025-09-08--15-20-19 INFO txtx::svm::deploy_program] Buffer Ready - Writing to buffer account is complete
+[2025-09-08--15-20-22 INFO txtx::svm::deploy_program] Program Created - Program AZW2pKHGYu23m6VTgGgHE9jaRPo1qbJVWp3jXptJKNSg has been deployed
+[2025-09-08--15-20-23 INFO txtx::svm::deploy_program] Complete - Ephemeral authority account closed and leftover funds returned to payer
+[2025-09-08--15-20-36 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:34778.
+[2025-09-08--15-20-38 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:34788.
+[2025-09-08--15-20-42 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:34804.
+[2025-09-08--15-20-43 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:38040.
+[2025-09-08--15-20-43 INFO parity_ws::io] Accepted a new tcp connection from 127.0.0.1:38042.
+[2025-09-08--15-22-31 INFO actix_server::worker] shutting down idle worker
+[2025-09-08--15-22-31 INFO actix_server::worker] shutting down idle worker
+[2025-09-08--15-22-31 INFO actix_server::worker] shutting down idle worker
+[2025-09-08--15-22-31 INFO actix_server::worker] shutting down idle worker
+[2025-09-08--15-22-31 INFO actix_server::worker] shutting down idle worker
+[2025-09-08--15-22-31 INFO actix_server::accept] accept thread stopped

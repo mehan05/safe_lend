@@ -115,6 +115,7 @@ describe("safe_lend", () => {
   let lender_vault: any;
   let borrower_ata: Account;
   let borrower_vault: any;
+  let borrower_ata_usdt: Account;
 
   const program = anchor.workspace.safeLend as Program<SafeLend>;
 
@@ -172,7 +173,7 @@ describe("safe_lend", () => {
     ).address;
 
     borrower_ata = await ata_accounts(borrower, mint_sol, false, borrower);
-
+    borrower_ata_usdt = await ata_accounts(borrower, mint_usdt, false, borrower);
     borrower_vault = (
       await getOrCreateAssociatedTokenAccount(
         provider.connection,
@@ -283,15 +284,118 @@ describe("safe_lend", () => {
       lender_ata.address
     );
 
-    let lender_vault_info = await getAccount(provider.connection,lender_vault);
+    let lender_vault_info = await getAccount(provider.connection, lender_vault);
 
     expect(BigInt(lender_ata_info.amount)).to.equal(
       initial_lender_ata_info.amount - BigInt(2)
     );
 
-    expect(BigInt(lender_vault_info.amount)).to.equal(initial_lender_vault_info.amount+BigInt(2));
+    expect(BigInt(lender_vault_info.amount)).to.equal(
+      initial_lender_vault_info.amount + BigInt(2)
+    );
 
     expect(loan_state_data.collateralAmount.toString()).to.equal("5");
     expect(loan_state_data.duration.toString()).to.equal("3600");
+  });
+
+  it("Borrow", async () => {
+    console.log("")
+    const initial_borrower_ata_info = await getAccount(
+      provider.connection,
+      borrower_ata_usdt.address
+    );
+
+    const initial_borrower_vault_info = await getAccount(
+      provider.connection,
+      borrower_vault
+    );
+
+    const initial_lender_vault_info = await getAccount(
+      provider.connection,
+      lender_vault
+    );
+
+    let loan_state_data = await program.account.loanState.fetch(loan_state);
+
+    let global_state_data = await program.account.globalState.fetch(
+      global_state
+    );
+
+    let user_state_data = await program.account.userState.fetch(user_state);
+
+    let total_loans = global_state_data.totalLoans.toNumber();
+    let active_loans = user_state_data.activeLoans.toNumber();
+
+    await program.methods
+      .borrow(SEED)
+      .accountsStrict({
+        admin: admin.publicKey,
+        lender: lender.publicKey,
+        borrower: borrower.publicKey,
+        borrowerAta: borrower_ata.address,
+        mintSol: mint_sol,
+        mintUsdt: mint_usdt,
+        globalState: global_state,
+        userState: user_state,
+        loanState: loan_state,
+        borrowerAtaUsdt: borrower_ata_usdt.address,
+        lendVault: lender_vault,
+        borrowerVault: borrower_vault,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SYSTEM_PROGRAM_ID,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
+      })
+      .signers([admin, borrower, lender])
+      .rpc();
+
+    const borrower_ata_info = await getAccount(
+      provider.connection,
+      borrower_ata_usdt.address
+    );
+
+    const borrower_vault_info = await getAccount(
+      provider.connection,
+      borrower_vault
+    );
+
+    const lender_vault_info = await getAccount(
+      provider.connection,
+      lender_vault
+    );
+
+    expect(BigInt(borrower_ata_info.amount)).to.equal(
+      initial_borrower_ata_info.amount -
+        BigInt(loan_state_data.collateralAmount.toNumber())
+    );
+
+    expect(BigInt(borrower_vault_info.amount)).to.equal(
+      initial_borrower_vault_info.amount +
+        BigInt(loan_state_data.collateralAmount.toNumber())
+    );
+
+    expect(BigInt(lender_vault_info.amount)).to.equal(
+      initial_lender_vault_info.amount -
+        BigInt(loan_state_data.collateralAmount.toNumber())
+    );
+
+    expect(BigInt(borrower_ata_info.amount)).to.equal(
+      initial_borrower_ata_info.amount +
+        BigInt(loan_state_data.collateralAmount.toNumber())
+    );
+
+    expect(global_state_data.totalLoans).to.equal(
+      new anchor.BN(total_loans + 1)
+    );
+
+    expect(user_state_data.activeLoans).to.equal(
+      new anchor.BN(active_loans + 1)
+    );
+
+    expect(loan_state_data.status).to.equal(0);
+    expect(loan_state_data.borrower).to.equal(borrower.publicKey);
+    expect(loan_state_data.startTime.toString()).to.not.equal("0");
+    expect(loan_state_data.endTime.toString()).to.not.equal("0");
+    
   });
 });

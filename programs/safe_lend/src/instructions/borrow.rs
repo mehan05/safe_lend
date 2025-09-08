@@ -27,7 +27,25 @@ pub struct Borrow<'info>{
     )]
     pub borrower_ata:InterfaceAccount<'info,TokenAccount>,
 
+    #[account(
+        init_if_needed,
+        payer = borrower,
+        associated_token::mint = mint_usdt,
+        associated_token::authority = borrower,
+        associated_token::token_program = token_program,
+    )]
+    pub borrower_ata_usdt:InterfaceAccount<'info,TokenAccount>,
+
+
+    #[account(
+        mint::token_program = token_program
+    )]
     pub mint_sol:InterfaceAccount<'info,Mint>,
+
+
+    #[account(
+        mint::token_program = token_program
+    )]
     pub mint_usdt:InterfaceAccount<'info,Mint>,
 
     #[account(
@@ -40,7 +58,7 @@ pub struct Borrow<'info>{
     #[account(
         mut,
         seeds=[b"lender",lender.key().as_ref(),seed.to_le_bytes().as_ref()],
-        bump,
+        bump
     )]
     pub  user_state:Account<'info,UserState>,
 
@@ -82,25 +100,21 @@ impl<'info> Borrow<'info>{
 
         let cpi_program = self.token_program.to_account_info();
 
-
-        
         let cpi_accounts = TransferChecked{
             from: self.borrower_ata.to_account_info(),
             to: self.borrower_vault.to_account_info(),
-            authority: self.lender.to_account_info(),
-            mint: self.mint_usdt.to_account_info(),
+            authority: self.borrower.to_account_info(),
+            mint: self.mint_sol.to_account_info(),
         };
 
         let ctx = CpiContext::new(cpi_program.clone(),cpi_accounts);
-        transfer_checked(ctx,self.loan_state.collateral_amount,self.mint_usdt.decimals)?;
-
+        transfer_checked(ctx,self.loan_state.collateral_amount,self.mint_sol.decimals)?;
 
         let cpi_accounts_lend_amount = TransferChecked{
             from: self.lend_vault.to_account_info(),
-            to: self.borrower_ata.to_account_info(),
-            authority: self.lender.to_account_info(),
+            to: self.borrower_ata_usdt.to_account_info(),
+            authority: self.user_state.to_account_info(),
             mint: self.mint_usdt.to_account_info(),
-        
         };
 
         let lender = self.lender.key();
